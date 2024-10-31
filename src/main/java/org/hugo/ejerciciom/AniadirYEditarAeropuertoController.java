@@ -6,12 +6,16 @@ import Dao.DaoAeropuertoPublico;
 import Dao.DaoDireccion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import Model.ModelAeropuertoPrivado;
 import Model.ModelAeropuertoPublico;
 import Model.ModelDireccion;
 import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 
@@ -21,8 +25,9 @@ import javafx.stage.Stage;
  * Este controlador maneja la entrada del usuario a través de un formulario para crear
  * o modificar aeropuertos, tanto públicos como privados.
  */
-public class AniadirYEditarAeropuertoController {
+public class AniadirYEditarAeropuertoController implements Initializable {
 
+    @FXML public Button btt_guardar;
     @FXML
     private Label lbl_Financiacion;
     @FXML
@@ -465,6 +470,12 @@ public class AniadirYEditarAeropuertoController {
                 al.setAlertType(AlertType.ERROR);
             }
             al.setContentText(error);
+        }
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (btt_guardar != null) {
+            btt_guardar.setDefaultButton(true);
         }
     }
 }

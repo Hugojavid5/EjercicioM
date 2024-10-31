@@ -7,12 +7,15 @@ import Model.ModelAeropuerto;
 import Model.ModelAvion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
 /**
  * Controlador para gestionar la adición de aviones a un aeropuerto.
  */
-public class AniadirAvionController {
-
+public class AniadirAvionController implements Initializable {
+    @FXML
+    public Button btt_guardar;
     @FXML
     private ComboBox<ModelAeropuerto> cb_aeropuerto;
 
@@ -33,7 +36,12 @@ public class AniadirAvionController {
 
     @FXML
     private TextField txt_velMaxima;
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (btt_guardar != null) {
+            btt_guardar.setDefaultButton(true);
+        }
+    }
     /**
      * Cancela la acción actual y cierra la ventana.
      *

@@ -37,16 +37,9 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        txt_password.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                btt_login.fire();
-            }
-        });
-        txt_usuario.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txt_password.requestFocus();
-            }
-        });
+        if (btt_login != null) {
+            btt_login.setDefaultButton(true); // Establecer el botón Login como predeterminado
+        }
     }
 
     /**

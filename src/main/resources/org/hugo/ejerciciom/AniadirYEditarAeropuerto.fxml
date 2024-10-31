@@ -102,7 +102,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="10.0" prefWidth="565.0" spacing="100.0" GridPane.columnSpan="2" GridPane.rowIndex="11">
             <children>
-                <Button mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+                <Button fx:id="btt_guardar" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
                 <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
             </children>
         </HBox>

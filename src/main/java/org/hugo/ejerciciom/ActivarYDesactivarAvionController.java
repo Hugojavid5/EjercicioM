@@ -5,17 +5,15 @@ import Model.ModelAeropuerto;
 import Model.ModelAvion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import Dao.DaoAvion;
 
 /**
  * Controlador para gestionar la activación y desactivación de aviones.
  */
 public class ActivarYDesactivarAvionController {
-
+    @FXML
+    public Button btt_guardar;
     @FXML
     private ComboBox<ModelAeropuerto> cb_aeropuertos;
 
@@ -40,6 +38,9 @@ public class ActivarYDesactivarAvionController {
         this.cb_aeropuertos.setItems(DaoAeropuerto.listaTodas());
         rb_activado.setVisible(!ListarAeropuertoController.isBorrar());
         rb_desactivado.setVisible(!ListarAeropuertoController.isBorrar());
+        if (btt_guardar != null) {
+            btt_guardar.setDefaultButton(true);
+        }
     }
 
     /**
