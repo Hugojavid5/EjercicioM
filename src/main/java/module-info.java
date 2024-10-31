@@ -2,7 +2,7 @@ module org.hugo.ejerciciol {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
-    requires java.sql;
+    requires java.sql.rowset;
 
     opens org.hugo.ejerciciom to javafx.fxml;
     exports org.hugo.ejerciciom;

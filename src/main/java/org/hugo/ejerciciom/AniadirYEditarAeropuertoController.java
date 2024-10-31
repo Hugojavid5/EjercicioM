@@ -13,6 +13,18 @@ import Model.ModelAeropuertoPrivado;
 import Model.ModelAeropuertoPublico;
 import Model.ModelDireccion;
 import javafx.stage.Stage;
+import Model.ModelAeropuerto;
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+import javax.sql.rowset.serial.SerialBlob;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +50,9 @@ public class AniadirYEditarAeropuertoController implements Initializable {
     private RadioButton rb_privado;
     @FXML
     private RadioButton rb_publico;
+    @FXML
+    private Blob imagenBlob;
+
 
     public RadioButton getRbPublico() {
         return rb_publico;
@@ -448,9 +463,9 @@ public class AniadirYEditarAeropuertoController implements Initializable {
             Integer idAeropuerto=DaoAeropuerto.conseguirID(nombre, anioInauguracion, capacidad, idDireccion, null);
             if(idAeropuerto==null) {
                 if(esPublico) {
-                    DaoAeropuerto.modificarPorId(tablaPublico.getSelectionModel().getSelectedItem().getId(), nombre, anioInauguracion, capacidad, idDireccion, null);
+                    DaoAeropuerto.modificarPorId(tablaPublico.getSelectionModel().getSelectedItem().getId(), nombre, anioInauguracion, capacidad, idDireccion, imagenBlob);
                 }else {
-                    DaoAeropuerto.modificarPorId(tablaPrivado.getSelectionModel().getSelectedItem().getId(), nombre, anioInauguracion, capacidad, idDireccion, null);
+                    DaoAeropuerto.modificarPorId(tablaPrivado.getSelectionModel().getSelectedItem().getId(), nombre, anioInauguracion, capacidad, idDireccion, imagenBlob);
                 }
                 idAeropuerto=DaoAeropuerto.conseguirID(nombre, anioInauguracion, capacidad,idDireccion, null);
             }
@@ -481,6 +496,40 @@ public class AniadirYEditarAeropuertoController implements Initializable {
         }
         if (btt_cancelar != null) {
             btt_cancelar.setCancelButton(true);
+        }
+    }
+
+    @FXML
+    void cargarImagen(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar Imagen del Aeropuerto");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif")
+        );
+        File file = fileChooser.showOpenDialog(null); // Cambia null por la ventana principal si es necesario
+        if (file != null) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                // Leer todos los bytes del InputStream y crear un Blob
+                byte[] imageBytes = fis.readAllBytes();
+                imagenBlob = new SerialBlob(imageBytes); // Asignar el Blob a la variable local
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Imagen cargada correctamente");
+                alert.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Manejo de errores
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Error al cargar la imagen");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Manejo de errores para la base de datos
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Error al crear el Blob");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         }
     }
 }

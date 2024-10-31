@@ -31,6 +31,9 @@ public class ModelAeropuerto {
         this.direccion = direccion;
         this.imagen = imagen;
     }
+    public void setImagen(Blob imagen) {
+        this.imagen = imagen;
+    }
 
     /**
      * Obtiene el ID del aeropuerto.
