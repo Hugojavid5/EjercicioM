@@ -1,0 +1,1 @@
+ejercicio que crea una interfaz para la gestion de unos aeropuertos y sus correspondientes aviones. Añadiendo un menu en la parte superior de la ventana donde cada item del menu tendra una funcion diferente
