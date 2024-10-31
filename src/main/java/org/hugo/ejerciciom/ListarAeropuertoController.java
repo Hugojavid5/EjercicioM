@@ -155,6 +155,18 @@ public class ListarAeropuertoController {
             e.printStackTrace();
         }
         txt_nombre.setOnKeyReleased(event -> filtrarPorNombre());
+        tablaPrivado.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                informacionAeropuerto(null);
+            }
+        });
+
+        tablaPublico.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                informacionAeropuerto(null);
+            }
+        });
+
         //Tabla publico
         listaTodasPublico= DaoAeropuertoPublico.cargarListaAeropuertosPublicos();
         tablaPublico.setItems(listaTodasPublico);
