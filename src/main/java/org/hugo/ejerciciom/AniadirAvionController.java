@@ -36,10 +36,17 @@ public class AniadirAvionController implements Initializable {
 
     @FXML
     private TextField txt_velMaxima;
+
+    @FXML
+    public Button btt_cancelar;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (btt_guardar != null) {
             btt_guardar.setDefaultButton(true);
+        }
+        if (btt_cancelar != null) {
+            btt_cancelar.setCancelButton(true);
         }
     }
     /**

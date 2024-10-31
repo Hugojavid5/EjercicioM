@@ -28,6 +28,9 @@ public class ActivarYDesactivarAvionController {
 
     @FXML
     private ToggleGroup rb_grupo;
+    @FXML
+    public Button btt_cancelar;
+
 
     /**
      * Inicializa el controlador, configurando los elementos de la interfaz
@@ -40,6 +43,9 @@ public class ActivarYDesactivarAvionController {
         rb_desactivado.setVisible(!ListarAeropuertoController.isBorrar());
         if (btt_guardar != null) {
             btt_guardar.setDefaultButton(true);
+        }
+        if (btt_cancelar != null) {
+            btt_cancelar.setCancelButton(true); // Establecer el botón Cancelar como botón de tipo cancel
         }
     }
 

@@ -69,6 +69,8 @@ public class AniadirYEditarAeropuertoController implements Initializable {
     private TextField txt_trabajadores;
     @FXML
     private TextField txt_numeroDeSocios;
+    @FXML
+    public Button btt_cancelar;
 
     private TableView<ModelAeropuertoPrivado> tablaPrivado;
     private TableView<ModelAeropuertoPublico> tablaPublico;
@@ -476,6 +478,9 @@ public class AniadirYEditarAeropuertoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (btt_guardar != null) {
             btt_guardar.setDefaultButton(true);
+        }
+        if (btt_cancelar != null) {
+            btt_cancelar.setCancelButton(true);
         }
     }
 }
