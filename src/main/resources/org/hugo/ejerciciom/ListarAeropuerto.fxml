@@ -18,6 +18,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ContextMenu?>
+
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../Estilos/Estilos.css" prefHeight="650.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hugo.ejerciciom.ListarAeropuertoController">    <children>
         <MenuBar>
@@ -116,6 +118,14 @@
                         <TableColumn fx:id="tcFinanciacion" minWidth="0.0" prefWidth="143.199951171875" text="Financiacion" />
                         <TableColumn fx:id="tcNumeroTrabajadores" prefWidth="122.4000244140625" text="Nº Trabajadores" />
                     </columns>
+                    <contextMenu>
+                        <ContextMenu>
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#editarAeropuerto" text="Editar" />
+                                <MenuItem mnemonicParsing="false" onAction="#borrarAeropuerto" text="Borrar" />
+                            </items>
+                        </ContextMenu>
+                    </contextMenu>
                 </TableView>
             </children>
         </StackPane>
