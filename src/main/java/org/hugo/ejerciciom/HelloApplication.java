@@ -13,7 +13,7 @@ import java.util.Properties;
  * Clase principal de la aplicación que gestiona la inicialización de la ventana de inicio de sesión.
  */
 public class HelloApplication extends Application {
-    private static Stage stage;
+     static Stage stage;
 
     /**
      * Método que inicia la aplicación y carga la interfaz de usuario.

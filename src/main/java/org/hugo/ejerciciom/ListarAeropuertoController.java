@@ -18,7 +18,11 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.sql.SQLException;
 import Model.ModelAvion;
-import org.hugo.ejerciciol.AniadirYEditarAeropuertoController;
+
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import static org.hugo.ejerciciom.HelloApplication.stage;
 /**
  * Controlador para la vista de listar aeropuertos.
  */
@@ -112,6 +116,9 @@ public class ListarAeropuertoController {
     private static Stage s;
     private static boolean esAniadir;
     private static boolean borrar=true;
+
+    private MenuItem selectedMenuItem;
+
     /**
      * Establece la lista de aeropuertos privados.
      *
@@ -176,7 +183,83 @@ public class ListarAeropuertoController {
         listaTodasPrivado= DaoAeropuertoPrivado.cargarListaAeropuertosPrivados();
         filtroPrivado=new FilteredList<ModelAeropuertoPrivado>(listaTodasPrivado);
         tablaPrivado.setItems(listaTodasPrivado);
+
+        aniadirMenuNavegar();
     }
+
+    private void aniadirMenuNavegar() {
+        // Asociar acciones a los elementos del menú
+        menuAniadirAeropuerto.setOnAction(this::aniadirAeropuerto);
+        menuActivarDesactivarAvion.setOnAction(this::activarDesactivarAvion);
+        menuAniadirAvion.setOnAction(this::aniadirAvion);
+        menuBorrarAeropuerto.setOnAction(this::borrarAeropuerto);
+        menuEditarAeropuerto.setOnAction(this::editarAeropuerto);
+        menuEliminarAvion.setOnAction(this::eliminarAvion);
+        menuInformacionAeropuerto.setOnAction(this::informacionAeropuerto);
+        // Agregar un EventFilter al root de la escena
+        Scene scene = stage.getScene();// Asumiendo que el MenuItem es parte de un Popup
+        if (scene != null) {
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                if (selectedMenuItem != null) {
+                    if (event.getCode() == KeyCode.UP) {
+                        navegarPorMenu(-1);
+                    } else if (event.getCode() == KeyCode.DOWN) {
+                        navegarPorMenu(1);
+                    } else if (event.getCode() == KeyCode.ENTER) {
+                        selectedMenuItem.fire(); // Ejecutar la acción del menú seleccionado
+                    }
+                }
+            });
+        }
+    }
+    /**
+     * Navega por los elementos del menú.
+     *
+     * @param direction La dirección en la que navegar (1 para abajo, -1 para arriba)
+     */
+    private void navegarPorMenu(int direction) {
+        // Obtener todos los elementos de menú en un array
+        MenuItem[] menuItems = {
+                menuAniadirAeropuerto,
+                menuActivarDesactivarAvion,
+                menuAniadirAvion,
+                menuBorrarAeropuerto,
+                menuEditarAeropuerto,
+                menuEliminarAvion,
+                menuInformacionAeropuerto
+        };
+        // Encontrar el índice del elemento actualmente seleccionado
+        int currentIndex = -1;
+        for (int i = 0; i < menuItems.length; i++) {
+            if (menuItems[i] == selectedMenuItem) {
+                currentIndex = i;
+                break;
+            }
+        }
+        // Calcular el nuevo índice
+        int newIndex = currentIndex + direction;
+        // Ajustar el índice si está fuera de límites
+        if (newIndex < 0) newIndex = menuItems.length - 1; // Volver al final si es el inicio
+        else if (newIndex >= menuItems.length) newIndex = 0; // Volver al inicio si es el final
+        // Cambiar la selección
+        setSelectedMenuItem(menuItems[newIndex]);
+    }
+    /**
+     * Establece el elemento de menú actualmente seleccionado.
+     *
+     * @param menuItem El elemento de menú que se va a seleccionar
+     */
+    private void setSelectedMenuItem(MenuItem menuItem) {
+        if (selectedMenuItem != null) {
+            selectedMenuItem.setStyle(""); // Limpiar el estilo del anterior
+        }
+        selectedMenuItem = menuItem;
+        // Resalta el elemento seleccionado
+        menuItem.setStyle("-fx-background-color: lightblue;"); // Puedes cambiar el color según tus preferencias
+    }
+
+
+
     @FXML
     private void filtrarPorNombre() {
         String filtroTexto = txt_nombre.getText().toLowerCase();

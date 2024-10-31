@@ -3,7 +3,6 @@ package org.hugo.ejerciciom;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import BBDD.ConexionBBDD;
 import Dao.DaoUsuario;
 import Model.ModelUsuario;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +11,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.scene.input.KeyCode;
+import javafx.fxml.Initializable;
 
 import javafx.fxml.FXML;
 
 /**
  * Controlador para la funcionalidad de inicio de sesión en la aplicación.
  */
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private Button btt_login;  // Botón para iniciar sesión
@@ -31,7 +32,22 @@ public class LoginController {
     @FXML
     private TextField txt_usuario;  // Campo de texto para el nombre de usuario
 
-    private DaoUsuario daoUsuario;  // DAO para manejar usuarios
+    private DaoUsuario daoUsuario;
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        txt_password.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btt_login.fire();
+            }
+        });
+        txt_usuario.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txt_password.requestFocus();
+            }
+        });
+    }
 
     /**
      * Maneja el evento de clic en el botón de inicio de sesión.
