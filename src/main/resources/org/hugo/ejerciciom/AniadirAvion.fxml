@@ -15,7 +15,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hugo.ejerciciom.AniadirAvionController">    <columnConstraints>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../Estilos/Estilos.css" prefHeight="586.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hugo.ejerciciom.AniadirAvionController">    <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="336.20001220703125" minWidth="10.0" prefWidth="201.79998779296875" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.20001220703125" minWidth="10.0" prefWidth="398.20001220703125" />
     </columnConstraints>
