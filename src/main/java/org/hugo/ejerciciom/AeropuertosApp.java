@@ -12,11 +12,11 @@ import java.util.Properties;
 /**
  * Clase principal de la aplicación que gestiona la inicialización de la ventana de inicio de sesión.
  */
-public class HelloApplication extends Application {
+public class AeropuertosApp extends Application {
      static Stage stage;
 
     /**
-     * Método que inicia la aplicación y carga la interfaz de usuario.
+     * Metodo que inicia la aplicación y carga la interfaz de usuario.
      *
      * @param s El escenario principal de la aplicación.
      * @throws IOException Si ocurre un error al cargar el archivo FXML.
@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
     public void start(Stage s) throws IOException {
         stage = s;
         Properties connConfig = ConexionBBDD.loadProperties();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AeropuertosApp.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 250, 150);
         stage.setResizable(false);
         stage.setTitle("Login de aviones");
@@ -34,7 +34,7 @@ public class HelloApplication extends Application {
     }
 
     /**
-     * Método que devuelve el escenario principal de la aplicación.
+     * Metodo que devuelve el escenario principal de la aplicación.
      *
      * @return El escenario principal de la aplicación.
      */
@@ -43,7 +43,7 @@ public class HelloApplication extends Application {
     }
 
     /**
-     * Método principal que inicia la aplicación.
+     * Metodo principal que inicia la aplicación.
      *
      * @param args Argumentos de la línea de comandos.
      */
